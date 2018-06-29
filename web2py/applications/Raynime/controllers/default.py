@@ -12,6 +12,9 @@ def index():
 def homepage():
     return dict(message=T('Homepage'))
 
+def sign_up():
+    return dict(message=T('Sign_up'))
+
 def paige():
     return dict(whatever=T('Im a Paige'))
 
