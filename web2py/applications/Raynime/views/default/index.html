@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 
-{{extend 'layout.html'}}
-
-{{block header}}
-<center style="background-color: #333; color:white; padding:30px">
-  <h1>/{{=request.application}}/{{=request.controller}}/{{=request.function}}</h1>
-</center>
-{{end}}
-
 {{if 'message' in globals():}}
 <h2>{{=message}}</h2>
-<p class="lead">{{=T('How did you get here?')}}</p>
+
+<h2>This is an h2</h2>
+
+<p>this is a p<p>
+
 <ol>
-  <li>{{=T('You are successfully running web2py')}}</li>
-  <li>{{=XML(T('You visited the url %s', A(request.env.path_info,_href=request.env.path_info)))}}</li>
-  <li>{{=XML(T('Which called the function %s located in the file %s',
-    (A(request.function+'()',_href='#'),
-    A('web2py/applications/%(application)s/controllers/%(controller)s.py' % request,
-    _href=URL('admin','default','peek', args=(request.application,'controllers',request.controller+'.py'))))))}}</li>
-  <li>{{=XML(T('The output of the file is a dictionary that was rendered by the view %s',
-    A('web2py/applications/%(application)s/views/%(controller)s/index.html' % request,
-    _href=URL('admin','default','peek',args=(request.application,'views',request.controller,'index.html')))))}}</li>
-  <li>{{=T('You can modify this application and adapt it to your needs')}}</li>
+	<li>this is an li</li>
+	<li>still li</li>
+	<li>last li</li>
 </ol>
+
+<div style="border-style:solid">
+	<p>this is a div with a p inside</p>
+</div>
+
 <center style="padding:50px">
   <a class="btn btn-primary" href="{{=URL('admin','default','index')}}">
     <i class="glyphicon glyphicon-cog"></i>
