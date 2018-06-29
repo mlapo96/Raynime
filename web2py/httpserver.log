@@ -817,3 +817,7 @@
 127.0.0.1, 2018-06-29 01:54:27, GET, /Raynime/default/paige, HTTP/1.1, 200, 0.031000
 127.0.0.1, 2018-06-29 01:54:27, GET, /Raynime/static/images/Festoor.gif, HTTP/1.1, 304, 0.001000
 127.0.0.1, 2018-06-29 01:54:27, GET, /favicon.ico, HTTP/1.1, 400, 0.000000
+127.0.0.1, 2018-06-29 01:58:02, GET, /Raynime/default/paige, HTTP/1.1, 200, 0.016000
+127.0.0.1, 2018-06-29 01:58:02, GET, /favicon.ico, HTTP/1.1, 400, 0.000000
+127.0.0.1, 2018-06-29 01:58:09, GET, /Raynime/default/paige, HTTP/1.1, 200, 0.030000
+127.0.0.1, 2018-06-29 01:58:09, GET, /favicon.ico, HTTP/1.1, 400, 0.001000
