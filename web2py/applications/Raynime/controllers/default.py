@@ -7,10 +7,14 @@
 # ---- example index page ----
 def index():
     response.flash = T("Hello World")
-    return dict(message=T('This is the homepage!'))
+    return dict(message=T('This is the help page!'))
+
+def homepage():
+    return dict(message=T('Homepage'))
 
 def paige():
     return dict(whatever=T('Im a Paige'))
+
 # ---- API (example) -----
 @auth.requires_login()
 def api_get_user_email():
