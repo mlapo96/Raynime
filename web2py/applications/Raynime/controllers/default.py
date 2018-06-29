@@ -9,6 +9,8 @@ def index():
     response.flash = T("Hello World")
     return dict(message=T('This is the homepage!'))
 
+def paige():
+    return dict(whatever=T('Im a Paige'))
 # ---- API (example) -----
 @auth.requires_login()
 def api_get_user_email():
