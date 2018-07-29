@@ -17,12 +17,16 @@ def homepage():
     # Make a get request to get the latest position of the international space station from the opennotify api.
   
     param = {'anime' : '87'}
+    list_params = {'type' : 'anime', 
+                   'name' : 'Z',
+                   'nskip' : '0',
+                   'nlist' : '8'}
      
     req = requests.get("http://cdn.animenewsnetwork.com/encyclopedia/api.xml", params=param)
     print(req.url)
     
     
-    #req = requests.get("http://cdn.animenewsnetwork.com/reports/api.xml", params=param)
+    req_list = requests.get("http://cdn.animenewsnetwork.com/encyclopedia/api.xml", params=list_params)
 
     print(type(req))
 
@@ -39,6 +43,11 @@ def homepage():
     for item in list:
         print(item)
 
+    
+    myxml_2 = minidom.parseString(req_list.text)
+    info = myxml_2.getElementsByTagName('anime')
+    print(myxml_2.)
+    
     return dict(message=(list))
 
 def sign_up():
