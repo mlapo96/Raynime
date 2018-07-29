@@ -3,6 +3,10 @@
 # This is a sample controller
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
+import requests
+import json
+import xml.etree.ElementTree as ET 
+from xml.dom import minidom
 
 # ---- example index page ----
 def index():
@@ -10,7 +14,32 @@ def index():
     return dict(message=T('This is the help page!'))
 
 def homepage():
-    return dict(message=T('Homepage'))
+    # Make a get request to get the latest position of the international space station from the opennotify api.
+  
+    param = {'anime' : '87'}
+     
+    req = requests.get("http://cdn.animenewsnetwork.com/encyclopedia/api.xml", params=param)
+    print(req.url)
+    
+    
+    #req = requests.get("http://cdn.animenewsnetwork.com/reports/api.xml", params=param)
+
+    print(type(req))
+
+    
+    # Parsing the xml
+    myxml = minidom.parseString(req.text)
+    basic_info = myxml.getElementsByTagName('anime')
+    items_2 = myxml.getElementsByTagName('info')
+    
+    list = [ basic_info[0].attributes['name'].value, items_2[0].attributes['src'].value ]
+    
+    print('Item attribute:')  
+    
+    for item in list:
+        print(item)
+
+    return dict(message=(list))
 
 def sign_up():
     return dict(message=T('Sign_up'))
