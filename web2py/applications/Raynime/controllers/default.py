@@ -44,9 +44,6 @@ def homepage():
         print(item)
 
     
-    myxml_2 = minidom.parseString(req_list.text)
-    info = myxml_2.getElementsByTagName('anime')
-    print(myxml_2.)
     
     return dict(message=(list))
 
