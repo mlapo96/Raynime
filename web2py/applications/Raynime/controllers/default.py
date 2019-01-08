@@ -78,6 +78,8 @@ def sign_up():
 def paige():
     return dict(whatever=T('Im a Page'))
 
+def viewer():
+    return dict(message=T('WAAAACHTER'))
 # ---- API (example) -----
 @auth.requires_login()
 def api_get_user_email():
