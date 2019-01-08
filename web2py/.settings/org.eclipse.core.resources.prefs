@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
+encoding//applications/Raynime/controllers/appadmin.py=utf-8
 encoding//applications/Raynime/controllers/default.py=utf-8
 encoding//applications/Raynime/models/db.py=utf-8
+encoding//applications/Raynime/routes.example.py=utf-8
 encoding//applications/welcome/models/db.py=utf-8
 encoding//gluon/tools.py=utf-8
 encoding/web2py.py=utf-8

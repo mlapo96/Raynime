@@ -7,51 +7,76 @@ import requests
 import json
 import xml.etree.ElementTree as ET 
 from xml.dom import minidom
+from _winapi import NULL
 
 # ---- example index page ----
 def index():
-    response.flash = T("Hello World")
-    return dict(message=T('This is the help page!'))
+    #response.flash = T("Hello World")
+    #return dict(message=T('This is the help page!'))
+    
+    # Check url for args
+    search = ''
+    if not request.args:
+        search = 'a'
+    else:
+        search = request.args[0]
+    print(request.args)
+        
+    # Calling ann API
+    req = ani_news_call(search)
 
-def homepage():
-    # Make a get request to get the latest position of the international space station from the opennotify api.
-  
-    param = {'anime' : '87'}
-    list_params = {'type' : 'anime', 
-                   'name' : 'Z',
-                   'nskip' : '0',
-                   'nlist' : '8'}
-     
-    req = requests.get("http://cdn.animenewsnetwork.com/encyclopedia/api.xml", params=param)
-    print(req.url)
+    # Parse xml list
+    listxml = minidom.parseString(req.text)
+    #info = listxml.getElementsByTagName('name')
+    #type = listxml.getElementsByTagName('type')
+    info = listxml.getElementsByTagName('name')
+    type = listxml.getElementsByTagName('type')
     
-    
-    req_list = requests.get("http://cdn.animenewsnetwork.com/encyclopedia/api.xml", params=list_params)
-
-    print(type(req))
-
-    
-    # Parsing the xml
-    myxml = minidom.parseString(req.text)
-    basic_info = myxml.getElementsByTagName('anime')
-    items_2 = myxml.getElementsByTagName('info')
-    
-    list = [ basic_info[0].attributes['name'].value, items_2[0].attributes['src'].value ]
-    
+    # Add titles to the list
     print('Item attribute:')  
     
-    for item in list:
-        print(item)
-
+    list1 = []
+    list2 = []
     
+    for i in info:
+        for cn in i.childNodes:
+            print(cn.nodeValue)
+            list1.append(cn.nodeValue)
+            
+    for i in type:
+        for cn in i.childNodes:
+            print(cn.nodeValue)
+            list2.append(cn.nodeValue)
+                        
+    print(req.text)
     
-    return dict(message=(list))
+    if len(list1) > 0:
+        list1.pop(0)
+    if len(list2) > 0: 
+        list2.pop(0)
+    list1.sort()
+    print(list1)
+    
+    return dict(message=(list1))
 
+def ani_news_call(letter):
+    list_params = {'id' : '155',
+                   'type' : 'anime',
+                   'name' : letter,
+                   'nlist' : 'all'}
+    
+    req_list = requests.get("http://www.animenewsnetwork.com/encyclopedia/reports.xml?", params = list_params)
+    return req_list
+
+def homepage():
+    
+    return dict(message=T("hi"))
+    
 def sign_up():
     return dict(message=T('Sign_up'))
 
 def paige():
-    return dict(whatever=T('Im a Paige'))
+    return dict(whatever=T('Im a Page'))
 
 # ---- API (example) -----
 @auth.requires_login()
