@@ -67,12 +67,15 @@ function myFunction() {
 	
 <!-- BODY -->
 <div id="main_div">
+
+	<!-- Letters a-z -->
 	<script>
 		var url = window.location.href
 		if(url.endsWith('/index')){
-			window.location.href = url + '/'
+			window.location.href = url + '/a'
 		}
 	</script>
+	
 	{{for letter in range(97,123):}}
 		<div style="width:3%; float:left;">
 			<p onclick="location.href='{{=chr(letter)}}';">
@@ -83,14 +86,14 @@ function myFunction() {
 
 	<!-- LIST -->
 	{{val=0}}
-	{{for item in message:}}
-		<div id="box1">
+	{{for item in message[0]:}}
+		<div id="box1" onclick="goViewer({{=message[1][val]}})">
 			<div id="inner">
 				<!--div style="border:solid; height:60%; width:90%; margin: 0 auto;">
 					<img style="width:100%; height:100%;" src=""/>
 				</div-->
 				<div id="description">
-					<p style="font-family:'Comic Sans MS', cursive, sans-serif">{{=message[val]}}</p>
+					<p style="font-family:'Comic Sans MS', cursive, sans-serif">{{=message[0][val]}}</p>
 					<!--p style="font-family:'Comic Sans MS', cursive, sans-serif"># of episodes: </p>
 					<progress value="22" max="100"></progress-->
 				</div>
@@ -98,5 +101,16 @@ function myFunction() {
 		</div>
 		{{val = val+1}}
 	{{pass}}
+	
+	<!-- Redirect to viewer.html -->
+	<script>
+		function goViewer(id){
+			var url = window.location.href
+			url = url.slice(0,-7)
+			url += 'viewer/'
+			url += id
+			window.location.href = url
+		}
+	</script>
 	
 </div>

@@ -7,9 +7,10 @@ import requests
 import json
 import xml.etree.ElementTree as ET 
 from xml.dom import minidom
+from xml.dom.minidom import parse
 from _winapi import NULL
 
-# ---- example index page ----
+# ---- Main page for searching ----
 def index():
     #response.flash = T("Hello World")
     #return dict(message=T('This is the help page!'))
@@ -27,10 +28,8 @@ def index():
 
     # Parse xml list
     listxml = minidom.parseString(req.text)
-    #info = listxml.getElementsByTagName('name')
-    #type = listxml.getElementsByTagName('type')
     info = listxml.getElementsByTagName('name')
-    type = listxml.getElementsByTagName('type')
+    id = listxml.getElementsByTagName('id')
     
     # Add titles to the list
     print('Item attribute:')  
@@ -43,7 +42,7 @@ def index():
             print(cn.nodeValue)
             list1.append(cn.nodeValue)
             
-    for i in type:
+    for i in id:
         for cn in i.childNodes:
             print(cn.nodeValue)
             list2.append(cn.nodeValue)
@@ -52,13 +51,14 @@ def index():
     
     if len(list1) > 0:
         list1.pop(0)
-    if len(list2) > 0: 
-        list2.pop(0)
-    list1.sort()
-    print(list1)
-    
-    return dict(message=(list1))
 
+    #list1.sort()
+    print(len(list1))
+    print(len(list2))
+    
+    return dict(message=(list1,list2))
+
+# ---- Find anime by name ----
 def ani_news_call(letter):
     list_params = {'id' : '155',
                    'type' : 'anime',
@@ -67,6 +67,68 @@ def ani_news_call(letter):
     
     req_list = requests.get("http://www.animenewsnetwork.com/encyclopedia/reports.xml?", params = list_params)
     return req_list
+
+# ---- More info on selected anime ----
+def viewer():
+    
+    # Check url for args
+    search = ''
+    if not request.args:
+        search = '1'
+    else:
+        search = request.args[0]
+    print(request.args)
+    
+    req = ani_news_spec(search)
+    
+     # Parse xml list
+    listxml = minidom.parseString(req.text)
+    info1 = listxml.getElementsByTagName('anime')
+    info2 = listxml.getElementsByTagName('info')
+    info3 = listxml.getElementsByTagName('img')
+
+    print(req.text)
+    print('-----------------------------')
+    
+    ani_name = ''
+    ani_plot = ''
+    ani_photo = ''
+    
+    for i in info1:
+        #for cn in i.childNodes:
+        #    print(cn.nodeValue)
+        if(i.getAttribute('name') != ''):
+            ani_name = i.getAttribute('name')
+        #print(i)
+        #print(i.getAttribute('href'))
+    
+    for i in info2:
+        if(i.getAttribute('type') == 'Plot Summary'):
+            print('plot here')
+            for cn in i.childNodes:
+                ani_plot = cn.nodeValue
+                #print(cn.nodeValue)
+            #print(i.childNodes)
+        #for cn in i.childNodes:
+        #    print(cn.nodeValue)
+        
+    for i in info3:
+        if(i.getAttribute('src') != ''):
+            ani_photo = i.getAttribute('src')
+        
+    print(ani_name)
+    print(ani_plot)
+    print(ani_photo)
+    
+    ani_list = [ani_name, ani_plot, ani_photo]
+    
+    return dict(message=(ani_list))
+
+def ani_news_spec(id):
+    list_params = {'anime' : id}
+    req_list = requests.get("https://cdn.animenewsnetwork.com/encyclopedia/api.xml?", params = list_params)
+    return req_list
+    
 
 def homepage():
     
@@ -78,8 +140,10 @@ def sign_up():
 def paige():
     return dict(whatever=T('Im a Page'))
 
-def viewer():
-    return dict(message=T('WAAAACHTER'))
+
+
+
+
 # ---- API (example) -----
 @auth.requires_login()
 def api_get_user_email():

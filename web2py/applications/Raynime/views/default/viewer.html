@@ -18,16 +18,43 @@ body, html {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    padding-left: 20%;
+}
+
+.photo {
+	padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+	width: 30%;
+	height: 50%;
+	float:left;
 }
 </style>
 </head>
 <body>
 
 <div class="bg" style="padding-top:250px">
-	<div style="background-color:Black; width:60%; height:60%; margin:	auto; ">
-		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/fUcNYtDOGe8">
-		</iframe>
+
+	{{if message[2] != '':}}
+	<div class="photo" style="background-color:black;">
+		
+		<!-- display image -->
+		<img style="width:100%;" src="{{=message[2]}}">
+		<!--iframe width="100%" height="100%" src="https://www.youtube.com/embed/fUcNYtDOGe8">
+		</iframe-->
+		
 	</div>
+	{{pass}}
+	
+	<!-- title & summary -->
+	<div class="photo" style="background-color:White;">
+		<p>{{=message[0]}}</p>
+		<p>{{=message[1]}}</p>
+		<button>Add to watch list</button>
+	</div>
+		
+	
 </div>
 </body>
 </html>
