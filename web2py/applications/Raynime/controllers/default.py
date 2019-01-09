@@ -5,10 +5,9 @@
 # -------------------------------------------------------------------------
 import requests
 import json
-import xml.etree.ElementTree as ET 
 from xml.dom import minidom
 from xml.dom.minidom import parse
-from _winapi import NULL
+
 
 # ---- Main page for searching ----
 def index():
