@@ -52,8 +52,12 @@ def index():
         list1.pop(0)
 
     # Sort list1 while matching list2 elements
-    lists = list(sorted(zip(list1,list2)))   
-    sorted_list1, sorted_list2 = zip(*lists)
+    lists = list(sorted(zip(list1,list2)))
+    
+    sorted_list1 = []
+    sorted_list2 = []
+    if len(lists) > 0:   
+        sorted_list1, sorted_list2 = zip(*lists)
     
     return dict(message=(sorted_list1,sorted_list2))
 
@@ -93,23 +97,16 @@ def viewer():
     ani_plot = ''
     ani_photo = ''
     
+    # Search info, grab name, plot, image
     for i in info1:
-        #for cn in i.childNodes:
-        #    print(cn.nodeValue)
         if(i.getAttribute('name') != ''):
             ani_name = i.getAttribute('name')
-        #print(i)
-        #print(i.getAttribute('href'))
     
     for i in info2:
         if(i.getAttribute('type') == 'Plot Summary'):
             print('plot here')
             for cn in i.childNodes:
                 ani_plot = cn.nodeValue
-                #print(cn.nodeValue)
-            #print(i.childNodes)
-        #for cn in i.childNodes:
-        #    print(cn.nodeValue)
         
     for i in info3:
         if(i.getAttribute('src') != ''):
@@ -119,6 +116,7 @@ def viewer():
     print(ani_plot)
     print(ani_photo)
     
+    # Combine name, plot, image into list 
     ani_list = [ani_name, ani_plot, ani_photo]
     
     return dict(message=(ani_list))
