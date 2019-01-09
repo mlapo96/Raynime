@@ -52,11 +52,11 @@ def index():
     if len(list1) > 0:
         list1.pop(0)
 
-    #list1.sort()
-    print(len(list1))
-    print(len(list2))
+    # Sort list1 while matching list2 elements
+    lists = list(sorted(zip(list1,list2)))   
+    sorted_list1, sorted_list2 = zip(*lists)
     
-    return dict(message=(list1,list2))
+    return dict(message=(sorted_list1,sorted_list2))
 
 # ---- Find anime by name ----
 def ani_news_call(letter):
