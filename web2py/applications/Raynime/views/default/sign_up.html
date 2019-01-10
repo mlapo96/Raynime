@@ -41,36 +41,34 @@ body {
 		<div>
 			<h2>Sign Up</h2>
 		</div>
-		<form action="/action_page.php">
-		<br>
-  			Username:<br>
-  		<input type="text" name="" value="">
-		<!--br>
-			Email:<br>
-  		<input type="text" name="" value="">
-  		
-  		<br>
-  			Password:<br>
-  		<input type="password" name="" value="">
-  		<br>
-  			Confirm Password:<br>
-  		<input type="password" name="" value=""-->
-  		<br><br>
-  			<input type="submit" value="Create Account">
-		</form> 
+		<form action="submit_sign_up">
+			<fieldset>
+				<p>
+					<label>Username</label>
+					<input type="text" name="username" placeholder=".....">
+				</p>
+				<p>
+					<input type="submit" value="Submit">
+				</p>
+			</fieldset>
+		</form>
 	</div>
 	
 	<!-- Login Div -->
 	<div id="inner">
 		<div>
-			<h2>Log In</h2>
+			<h2>Login</h2>
 		</div>
-		<form action="/action_page.php">
-		<br>
-  			Username:<br>
-  		<input type="text" name="" value="">
-  		<br><br>
-  			<input type="submit" value="Log In">
-		</form> 
+		<form action="submit_login">
+			<fieldset>
+				<p>
+					<label>Username</label>
+					<input type="text" name="username" placeholder=".....">
+				</p>
+				<p>
+					<input type="submit" value="Submit">
+				</p>
+			</fieldset>
+		</form>
 	</div>
 </div>

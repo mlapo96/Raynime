@@ -8,6 +8,8 @@ import json
 from xml.dom import minidom
 from xml.dom.minidom import parse
 
+username = ''
+
 
 # ---- Main page for searching ----
 def index():
@@ -132,7 +134,48 @@ def homepage():
     return dict(message=T("hi"))
     
 def sign_up():
+    #print(auth.user)
     return dict(message=T('Sign_up'))
+
+# create a new account
+def submit_sign_up():    
+    q = (db.user_table.username == request.vars.username)
+    cl = db(q).select().first()
+    print(cl)
+    if cl is not None:
+        # user already exists 
+        username = ''
+        response.flash = ("a user with that name already exists")       
+        redirect(URL('default','sign_up'))
+        return dict(message=T('submitted'))
+    else:
+        # create new user
+        db.user_table.insert(username=request.vars.username)
+        username = request.vars.username
+        redirect(URL('default', 'profile'))
+    
+    print(request.vars.username)
+    return dict(message=T('submitted'))
+
+# log into existing account
+def submit_login():
+    q = (db.user_table.username == request.vars.username)
+    cl = db(q).select().first()
+    print(cl)
+    if cl is not None: 
+        # user exists
+        username = request.vars.username
+        redirect(URL('default', 'profile'))
+    else:
+        # user does not exist 
+        username = ''
+        redirect(URL('default','sign_up'))
+
+    return dict(message=T('submitted'))
+
+
+def profile():
+    return dict(message=T('Profile'))
 
 def paige():
     return dict(whatever=T('Im a Page'))

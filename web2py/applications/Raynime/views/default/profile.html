@@ -1,0 +1,66 @@
+{{include 'web2py_ajax.html'}}
+
+<style>
+body { 
+	background-color: #606060
+}
+</style>
+
+<style>
+#box1 {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+	width: 27%; 
+	height: 10%;	
+	float: left;
+}
+#inner {
+	width: 90%; 
+	height: 90%; 
+	margin: auto auto; 
+	background-color: Red;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+#description {
+	width: 90%; 
+	
+	margin: 0 auto; 
+	background-color: Green;
+	border: solid;
+	text-align:center;
+}
+</style>
+
+<style type="text/css">
+#main_div {
+	width: 80%; 
+	height: 85%; 
+	margin: 0 auto; 
+	background-color:white;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	overflow:scroll;
+}
+</style>
+
+<div id="main_div">
+	<p style="font-weight:bold;">Username:</p>
+	<p>Watching:</p>
+	{{for x in range(0,3):}}
+	<div id="box1">
+		<div id="inner">
+			<div id="description">
+			</div>
+		</div>
+	</div>
+	  
+	{{pass}}
+	
+</div>
