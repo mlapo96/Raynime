@@ -1,3 +1,9 @@
+<style>
+body { 
+	background-color: #606060
+}
+</style>
+
 <style type="text/css">
 #main_div {
 	width: 80%; 
@@ -5,15 +11,20 @@
 	margin: 0 auto; 
 	background-color:white;
 	padding-top: 20px;
+	padding-bottom: 20px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
-#inner {
-	width: 30%; 
-	height: 50%; 
-	margin: 0 auto; 
+#inner {	
 	background-color: #299cbc;
+	padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+	width: 27%; 
+	height: 30%;	
+	float: left;
 }
 
 </style>
@@ -24,26 +35,42 @@
 </div>
 
 <div id="main_div">
-	<center>
-	<div id="inner" style="padding-top:20px;">
-		<div style="margin: auto 0;">
+
+	<!-- Sign up div -->
+	<div id="inner">
+		<div>
 			<h2>Sign Up</h2>
 		</div>
 		<form action="/action_page.php">
-	  		Email:<br>
-  		<input type="text" name="" value="">
-  		<br>
+		<br>
   			Username:<br>
   		<input type="text" name="" value="">
+		<!--br>
+			Email:<br>
+  		<input type="text" name="" value="">
+  		
   		<br>
   			Password:<br>
   		<input type="password" name="" value="">
   		<br>
   			Confirm Password:<br>
-  		<input type="password" name="" value="">
+  		<input type="password" name="" value=""-->
   		<br><br>
-  			<input type="submit" value="Submit">
+  			<input type="submit" value="Create Account">
 		</form> 
 	</div>
-	</center>
+	
+	<!-- Login Div -->
+	<div id="inner">
+		<div>
+			<h2>Log In</h2>
+		</div>
+		<form action="/action_page.php">
+		<br>
+  			Username:<br>
+  		<input type="text" name="" value="">
+  		<br><br>
+  			<input type="submit" value="Log In">
+		</form> 
+	</div>
 </div>
