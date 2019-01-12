@@ -13,16 +13,13 @@ username = ''
 
 # ---- Main page for searching ----
 def index():
-    #response.flash = T("Hello World")
-    #return dict(message=T('This is the help page!'))
     
     # Check url for args
     search = ''
-    if not request.args:
+    if not request.vars:
         search = 'a'
     else:
-        search = request.args[0]
-    print(request.args)
+        search = request.vars['starts_with']
         
     # Calling ann API
     req = ani_news_call(search)
@@ -78,11 +75,11 @@ def viewer():
     
     # Check url for args
     search = ''
-    if not request.args:
+    if not request.vars:
         search = '1'
     else:
-        search = request.args[0]
-    print(request.args)
+        search = request.vars['id']
+    #print(request.args)
     
     req = ani_news_spec(search)
     
@@ -92,7 +89,7 @@ def viewer():
     info2 = listxml.getElementsByTagName('info')
     info3 = listxml.getElementsByTagName('img')
 
-    print(req.text)
+    #print(req.text)
     print('-----------------------------')
     
     ani_name = ''
@@ -181,17 +178,15 @@ def check_user_table(user_name):
         print("added to table")
     return
 
-#@auth.requires_login()
-#def hello():
-#    return dict(message='hello %(email)s' % auth.user)
-
 def profile():
     return dict(message=T('Profile'))
 
 def paige():
     return dict(whatever=T('Im a Page'))
 
-
+def switch_default_view():
+    #redirect(URL('default', 'sign_up')
+    return 'sign_up'
 
 
 

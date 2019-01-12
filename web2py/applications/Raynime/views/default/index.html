@@ -51,17 +51,15 @@ body {
 <!-- HEADER -->
 <div style="width: 80%; height: 10%; margin: 0 auto; background-color:Yellow; padding-top:10px; padding-left:20px">
 	<input type="button" onclick="location.href='paige';" value="find a new show" />
-	<input type="button" onclick="goToView('sign_up')" value="sign up" />
-	<input type="button" onclick="goToView('login')" value="log in" />
+	<input type="button" onclick="goToView('sign_up')" value="sign up/login" />
 	<input type="button" onclick="goToView('profile')" value="Profile" />
 </div>
 
 <script>
 	function goToView(pagename){
-		var url = window.location.href
-		url = url.slice(0,-7)
-		url += pagename
-		window.location.href = url
+		//var url = window.location.href
+		//url = url.slice(0,-7)
+		//url += pagename
 	}
 </script>
 	
@@ -72,13 +70,13 @@ body {
 	<script>
 		var url = window.location.href
 		if(url.endsWith('/index')){
-			window.location.href = url + '/a'
+			window.location.href = url + '?starts_with=a'
 		}
 	</script>
 	
 	{{for letter in range(97,123):}}
 		<div style="width:3%; float:left;">
-			<p onclick="location.href='{{=chr(letter)}}';">
+			<p onclick="location.href='index?starts_with={{=chr(letter)}}';">
 				{{=chr(letter)}}
 			</p>
 		</div>	
@@ -87,7 +85,7 @@ body {
 	<!-- LIST -->
 	{{val=0}}
 	{{for item in message[0]:}}
-		<div id="box1" onclick="goViewer({{=message[1][val]}})">
+		<div id="box1" onclick="location.href='viewer?id={{=message[1][val]}}'">
 			<div id="inner">
 				<!--div style="border:solid; height:60%; width:90%; margin: 0 auto;">
 					<img style="width:100%; height:100%;" src=""/>
