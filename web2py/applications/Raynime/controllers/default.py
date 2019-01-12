@@ -137,42 +137,53 @@ def sign_up():
     #print(auth.user)
     return dict(message=T('Sign_up'))
 
-# create a new account
+# create a new account/login to existing account
 def submit_sign_up():    
-    q = (db.user_table.username == request.vars.username)
+    
+    q = (db.auth_user.email == request.vars.username)
     cl = db(q).select().first()
-    print(cl)
+
+    if cl is None:
+        # create account
+        print('not found')
+        db.auth_user.insert(
+            first_name = None,
+            last_name = None,
+            email = request.vars.username,
+            password = 'cheese'
+        )
+        print('added to db')
+    
+    check_user_table(request.vars.username)
+
+    print('logged in user is:')
+    session.logged_in_user = request.vars.username
+    print(session.logged_in_user)
+    
+    #delete from table
+    #db(db.auth_user.first_name == 'kernolkorn').delete()
+    
+    print(db(db.auth_user).select())
+    redirect(URL('default','profile'))
+    return dict(message=T('submitted'))
+
+# adds user to table if needed
+def check_user_table(user_name):
+    q = (db.user_table.username == user_name)    
+    cl = db(q).select().first()
     if cl is not None:
         # user already exists 
-        username = ''
-        response.flash = ("a user with that name already exists")       
-        redirect(URL('default','sign_up'))
-        return dict(message=T('submitted'))
+        print("a user with that name already exists")       
     else:
         # create new user
         db.user_table.insert(username=request.vars.username)
         username = request.vars.username
-        redirect(URL('default', 'profile'))
-    
-    print(request.vars.username)
-    return dict(message=T('submitted'))
+        print("added to table")
+    return
 
-# log into existing account
-def submit_login():
-    q = (db.user_table.username == request.vars.username)
-    cl = db(q).select().first()
-    print(cl)
-    if cl is not None: 
-        # user exists
-        username = request.vars.username
-        redirect(URL('default', 'profile'))
-    else:
-        # user does not exist 
-        username = ''
-        redirect(URL('default','sign_up'))
-
-    return dict(message=T('submitted'))
-
+#@auth.requires_login()
+#def hello():
+#    return dict(message='hello %(email)s' % auth.user)
 
 def profile():
     return dict(message=T('Profile'))
