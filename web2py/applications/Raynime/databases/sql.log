@@ -291,3 +291,10 @@ CREATE TABLE "user_table"(
     "anilist" CHAR(512)
 );
 success!
+timestamp: 2019-01-12T18:32:36.690025
+CREATE TABLE "watch_list"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "username" CHAR(512),
+    "anime_id" CHAR(512)
+);
+success!

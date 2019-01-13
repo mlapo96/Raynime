@@ -30,22 +30,22 @@ def index():
     id = listxml.getElementsByTagName('id')
     
     # Add titles to the list
-    print('Item attribute:')  
+    #print('Item attribute:')  
     
     list1 = []
     list2 = []
     
     for i in info:
         for cn in i.childNodes:
-            print(cn.nodeValue)
+            #print(cn.nodeValue)
             list1.append(cn.nodeValue)
             
     for i in id:
         for cn in i.childNodes:
-            print(cn.nodeValue)
+            #print(cn.nodeValue)
             list2.append(cn.nodeValue)
                         
-    print(req.text)
+    #print(req.text)
     
     if len(list1) > 0:
         list1.pop(0)
@@ -103,7 +103,7 @@ def viewer():
     
     for i in info2:
         if(i.getAttribute('type') == 'Plot Summary'):
-            print('plot here')
+            #print('plot here')
             for cn in i.childNodes:
                 ani_plot = cn.nodeValue
         
@@ -111,9 +111,9 @@ def viewer():
         if(i.getAttribute('src') != ''):
             ani_photo = i.getAttribute('src')
         
-    print(ani_name)
-    print(ani_plot)
-    print(ani_photo)
+    #print(ani_name)
+    #print(ani_plot)
+    #print(ani_photo)
     
     # Combine name, plot, image into list 
     ani_list = [ani_name, ani_plot, ani_photo]
@@ -126,10 +126,12 @@ def ani_news_spec(id):
     return req_list
     
 
+# not used
 def homepage():
     
     return dict(message=T("hi"))
     
+
 def sign_up():
     #print(auth.user)
     return dict(message=T('Sign_up'))
@@ -153,15 +155,15 @@ def submit_sign_up():
     
     check_user_table(request.vars.username)
 
-    print('logged in user is:')
+    #print('logged in user is:')
     session.logged_in_user = request.vars.username
-    print(session.logged_in_user)
+    #print(session.logged_in_user)
     
     #delete from table
     #db(db.auth_user.first_name == 'kernolkorn').delete()
     
-    print(db(db.auth_user).select())
-    redirect(URL('default','profile'))
+    #print(db(db.auth_user).select())
+    redirect(URL('default','index'))
     return dict(message=T('submitted'))
 
 # adds user to table if needed
@@ -178,16 +180,18 @@ def check_user_table(user_name):
         print("added to table")
     return
 
+# logs out of current account
+def logout():
+    session.logged_in_user = ''
+    redirect(URL('default', 'index'))
+    return
+
 def profile():
+    print(db(db.watch_list).select())
     return dict(message=T('Profile'))
 
 def paige():
     return dict(whatever=T('Im a Page'))
-
-def switch_default_view():
-    #redirect(URL('default', 'sign_up')
-    return 'sign_up'
-
 
 
 # ---- API (example) -----

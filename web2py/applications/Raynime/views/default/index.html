@@ -52,7 +52,13 @@ body {
 <div style="width: 80%; height: 10%; margin: 0 auto; background-color:Yellow; padding-top:10px; padding-left:20px">
 	<input type="button" onclick="location.href='paige'" value="find a new show" />
 	<input type="button" onclick="location.href='sign_up'" value="sign up/login" />
-	<input type="button" onclick="location.href='profile'" value="Profile" />
+	
+	{{if session.logged_in_user is '':}}
+		<p>login to view your profile</p>
+	{{else:}}
+		<input type="button" onclick="location.href='profile'" value="Profile" />
+	{{pass}}
+	
 </div>
 
 <script>

@@ -35,7 +35,9 @@ body, html {
 <body>
 
 <div class="bg" style="padding-top:250px">
-
+	
+	
+	
 	{{if message[2] != '':}}
 	<div class="photo" style="background-color:black;">
 		
@@ -49,6 +51,7 @@ body, html {
 	
 	<!-- title & summary -->
 	<div class="photo" style="background-color:White;">
+		<p style="font-weight:bold;">You are: {{=session.logged_in_user}}</p>
 		<p style="font-weight:bold;">{{=message[0]}}</p>
 		<p>{{=message[1]}}</p>
 		<button>Add to watch list</button>
