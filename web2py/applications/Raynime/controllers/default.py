@@ -7,6 +7,8 @@ import requests
 import json
 from xml.dom import minidom
 from xml.dom.minidom import parse
+import urllib.request
+import re
 
 username = ''
 
@@ -235,6 +237,23 @@ def profile():
 
 def paige():
     return dict(whatever=T('Im a Page'))
+
+# searches youtube and returns url of first video
+def youtube_trailer():
+    #print('in search')
+    search = request.vars.title
+    search = search + " trailer anime"
+    #print(search)
+    query = urllib.parse.quote(search)
+    url = "https://www.youtube.com/results?search_query="+query
+    response = urllib.request.urlopen(url)
+    html = response.read()
+    search_results = re.findall(r'href=\"\/watch\?v=(.{11})', html.decode())
+    #print(search_results[0])
+    url = "https://www.youtube.com/embed/" + search_results[0]
+    print(url)
+              
+    return dict(message=T(url))
 
 
 # ---- API (example) -----
