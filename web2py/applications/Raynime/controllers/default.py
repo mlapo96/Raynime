@@ -112,10 +112,6 @@ def viewer():
     for i in info3:
         if(i.getAttribute('src') != ''):
             ani_photo = i.getAttribute('src')
-        
-    #print(ani_name)
-    #print(ani_plot)
-    #print(ani_photo)
     
     # Combine name, plot, image into list 
     ani_list = [ani_name, ani_plot, ani_photo, search]
@@ -126,14 +122,17 @@ def ani_news_spec(id):
     list_params = {'anime' : id}
     req_list = requests.get("https://cdn.animenewsnetwork.com/encyclopedia/api.xml?", params = list_params)
     return req_list
+
+# search bar
+def search_index():
+    search = "index?starts_with=" + request.vars['search']
+    redirect(URL('default', search))
+    return dict(message=('search'))
     
 def add_to_watch_list():
     
     q = (session.logged_in_user == db.watch_list.username) & (db.watch_list.anime_id == request.vars['id'])
     cl = db(q).select().first()
-    #print(request.vars['title'])
-    #print(request.vars['photo'])
-    #print(request.vars['id'])
 
     # adds username, anime_id to watch list 
     if cl is None:
@@ -186,15 +185,11 @@ def submit_sign_up():
         print('added to db')
     
     check_user_table(request.vars.username)
-
-    #print('logged in user is:')
     session.logged_in_user = request.vars.username
-    #print(session.logged_in_user)
     
     #delete from table
     #db(db.auth_user.first_name == 'kernolkorn').delete()
     
-    #print(db(db.auth_user).select())
     redirect(URL('default','index'))
     return dict(message=T('submitted'))
 
@@ -240,16 +235,16 @@ def paige():
 
 # searches youtube and returns url of first video
 def youtube_trailer():
-    #print('in search')
+
     search = request.vars.title
     search = search + " trailer anime"
-    #print(search)
+
     query = urllib.parse.quote(search)
     url = "https://www.youtube.com/results?search_query="+query
     response = urllib.request.urlopen(url)
     html = response.read()
     search_results = re.findall(r'href=\"\/watch\?v=(.{11})', html.decode())
-    #print(search_results[0])
+
     url = "https://www.youtube.com/embed/" + search_results[0]
     print(url)
               
