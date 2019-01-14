@@ -322,3 +322,8 @@ CREATE TABLE "watch_list"(
     "username" CHAR(512),
     "anime_id" CHAR(512)
 );
+timestamp: 2019-01-13T18:05:20.859607
+ALTER TABLE "watch_list" ADD "anime_name" CHAR(512);
+timestamp: 2019-01-13T18:05:20.875565
+ALTER TABLE "watch_list" ADD "anime_picture" CHAR(512);
+success!

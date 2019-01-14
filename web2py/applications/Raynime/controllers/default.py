@@ -129,24 +129,29 @@ def add_to_watch_list():
     
     q = (session.logged_in_user == db.watch_list.username) & (db.watch_list.anime_id == request.vars['id'])
     cl = db(q).select().first()
-    
+    #print(request.vars['title'])
+    #print(request.vars['photo'])
+    #print(request.vars['id'])
+
     # adds username, anime_id to watch list 
     if cl is None:
         db.watch_list.insert(
             username = session.logged_in_user,
-            anime_id = request.vars['id']
+            anime_id = request.vars['id'],
+            anime_name = request.vars['title'],
+            anime_picture = request.vars['photo']
         )
     
     redirect(URL('default', 'profile'))
     return
 
 def remove_from_watch_list():
-    print(request.vars['id'])
+    #print(request.vars['id'])
     q = (session.logged_in_user == db.watch_list.username) & (db.watch_list.anime_id == request.vars['id'])
     cl = db(q).select().first()
-    print(cl)
+    #print(cl)
     if cl is not None:
-        db(q).delete()
+       db(q).delete()
     
     redirect(URL('default', 'profile'))
     return
@@ -211,16 +216,22 @@ def logout():
     redirect(URL('default', 'index'))
     return
 
+# profile page
 def profile():
     watch_list_id = []
+    watch_list_name = []
+    watch_list_photo = []
     
     q = (session.logged_in_user == db.watch_list.username)
     cl = db(q).select()
     
     for row in cl:
         watch_list_id.append(row.anime_id)
-        
-    return dict(message=(watch_list_id))
+        watch_list_name.append(row.anime_name)
+        watch_list_photo.append(row.anime_picture)
+
+    print(db(db.watch_list).select())    
+    return dict(message=(watch_list_id, watch_list_name, watch_list_photo))
 
 def paige():
     return dict(whatever=T('Im a Page'))

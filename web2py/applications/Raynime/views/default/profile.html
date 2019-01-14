@@ -13,7 +13,7 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
 	width: 27%; 
-	height: 10%;	
+	height: 40%;	
 	float: left;
 }
 #inner {
@@ -33,6 +33,10 @@ body {
 	background-color: Green;
 	border: solid;
 	text-align:center;
+}
+#photo {
+	max-width: 90%;
+	max-height: 70%;
 }
 </style>
 
@@ -56,14 +60,20 @@ body {
 	<p style="font-weight:bold;">{{=session.logged_in_user}}</p>
 	<p>Watching:</p>
 	{{val=0}}
-	{{for item in message:}}
+	{{for item in message[0]:}}
 		<div id="box1">
 			<div id="inner">
 				<div id="description">id: {{=item}}</div>
-				<button onclick="location.href='remove_from_watch_list?id={{=item}}'">Remove</button>
+				<div id="description">{{=message[1][val]}}</div>
+				<div id="description">
+					<img id="photo" src="{{=message[2][val]}}">
+				</div>
+				<div id="description">
+					<button onclick="location.href='remove_from_watch_list?id={{=item}}'">Remove</button>
+				</div>
 			</div>		
 		</div>
-	  
+	  	{{val = val+1}}
 	{{pass}}
 	
 </div>

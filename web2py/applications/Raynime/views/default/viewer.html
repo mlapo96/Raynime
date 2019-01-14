@@ -58,7 +58,7 @@ body, html {
 		{{if session.logged_in_user is '' or session.logged_in_user is None:}}
 			<p style="font-weight:bold;">Login to add to your list</p>
 		{{else:}}
-			<button onclick="location.href='add_to_watch_list?id={{=message[3]}}'">{{=session.logged_in_user}}: Add to watch list</button>
+			<button onclick="location.href='add_to_watch_list?title={{=message[0]}}&photo={{=message[2]}}&id={{=message[3]}}'">{{=session.logged_in_user}}: Add to watch list</button>
 		{{pass}}
 	</div>
 		
