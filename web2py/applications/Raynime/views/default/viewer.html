@@ -51,10 +51,15 @@ body, html {
 	
 	<!-- title & summary -->
 	<div class="photo" style="background-color:White;">
-		<p style="font-weight:bold;">You are: {{=session.logged_in_user}}</p>
+	
 		<p style="font-weight:bold;">{{=message[0]}}</p>
 		<p>{{=message[1]}}</p>
-		<button>Add to watch list</button>
+		
+		{{if session.logged_in_user is '' or session.logged_in_user is None:}}
+			<p style="font-weight:bold;">Login to add to your list</p>
+		{{else:}}
+			<button onclick="location.href='add_to_watch_list?id={{=message[3]}}'">{{=session.logged_in_user}}: Add to watch list</button>
+		{{pass}}
 	</div>
 		
 	

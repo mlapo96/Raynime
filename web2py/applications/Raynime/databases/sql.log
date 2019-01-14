@@ -298,3 +298,27 @@ CREATE TABLE "watch_list"(
     "anime_id" CHAR(512)
 );
 success!
+timestamp: 2019-01-13T16:12:12.180445
+CREATE TABLE "watch_list"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "username" CHAR(512),
+    "anime_id" CHAR(512)
+);
+timestamp: 2019-01-13T16:12:13.211492
+CREATE TABLE "watch_list"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "username" CHAR(512),
+    "anime_id" CHAR(512)
+);
+timestamp: 2019-01-13T16:12:43.147729
+CREATE TABLE "watch_list"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "username" CHAR(512),
+    "anime_id" CHAR(512)
+);
+timestamp: 2019-01-13T16:15:56.268790
+CREATE TABLE "watch_list"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "username" CHAR(512),
+    "anime_id" CHAR(512)
+);

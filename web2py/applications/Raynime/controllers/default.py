@@ -14,7 +14,7 @@ username = ''
 # ---- Main page for searching ----
 def index():
     
-    # Check url for args
+    # Check url for vars
     search = ''
     if not request.vars:
         search = 'a'
@@ -116,7 +116,7 @@ def viewer():
     #print(ani_photo)
     
     # Combine name, plot, image into list 
-    ani_list = [ani_name, ani_plot, ani_photo]
+    ani_list = [ani_name, ani_plot, ani_photo, search]
     
     return dict(message=(ani_list))
 
@@ -125,6 +125,22 @@ def ani_news_spec(id):
     req_list = requests.get("https://cdn.animenewsnetwork.com/encyclopedia/api.xml?", params = list_params)
     return req_list
     
+def add_to_watch_list():
+    
+    q = (session.logged_in_user == db.watch_list.username) & (db.watch_list.anime_id == request.vars['id'])
+    cl = db(q).select().first()
+    
+    # adds username, anime_id to watch list 
+    if cl is None:
+        db.watch_list.insert(
+            username = session.logged_in_user,
+            anime_id = request.vars['id']
+        )
+    
+
+    #print(db(db.watch_list).select())
+    redirect(URL('default', 'profile'))
+    return
 
 # not used
 def homepage():
@@ -187,8 +203,15 @@ def logout():
     return
 
 def profile():
-    print(db(db.watch_list).select())
-    return dict(message=T('Profile'))
+    watch_list_id = []
+    
+    q = (session.logged_in_user == db.watch_list.username)
+    cl = db(q).select()
+    
+    for row in cl:
+        watch_list_id.append(row.anime_id)
+        
+    return dict(message=(watch_list_id))
 
 def paige():
     return dict(whatever=T('Im a Page'))
