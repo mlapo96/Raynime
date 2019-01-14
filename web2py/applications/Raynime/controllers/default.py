@@ -137,8 +137,17 @@ def add_to_watch_list():
             anime_id = request.vars['id']
         )
     
+    redirect(URL('default', 'profile'))
+    return
 
-    #print(db(db.watch_list).select())
+def remove_from_watch_list():
+    print(request.vars['id'])
+    q = (session.logged_in_user == db.watch_list.username) & (db.watch_list.anime_id == request.vars['id'])
+    cl = db(q).select().first()
+    print(cl)
+    if cl is not None:
+        db(q).delete()
+    
     redirect(URL('default', 'profile'))
     return
 
