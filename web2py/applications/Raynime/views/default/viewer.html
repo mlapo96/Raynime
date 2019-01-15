@@ -54,6 +54,9 @@ body, html {
 	
 		<p style="font-weight:bold;">{{=message[0]}}</p>
 		<p>{{=message[1]}}</p>
+		{{if message[4] is not '':}}
+			<p>{{=message[4]}} episodes</p>
+		{{pass}}
 		<button onclick="location.href='youtube_trailer?title={{=message[0]}}'">Watch Trailer</button>
 		
 		{{if session.logged_in_user is '' or session.logged_in_user is None:}}

@@ -81,7 +81,6 @@ def viewer():
         search = '1'
     else:
         search = request.vars['id']
-    #print(request.args)
     
     req = ani_news_spec(search)
     
@@ -90,13 +89,16 @@ def viewer():
     info1 = listxml.getElementsByTagName('anime')
     info2 = listxml.getElementsByTagName('info')
     info3 = listxml.getElementsByTagName('img')
+    info4 = listxml.getElementsByTagName('episode')
 
     #print(req.text)
+    #print(info4)
     print('-----------------------------')
     
     ani_name = ''
     ani_plot = ''
     ani_photo = ''
+    ani_ep = ''
     
     # Search info, grab name, plot, image
     for i in info1:
@@ -112,9 +114,12 @@ def viewer():
     for i in info3:
         if(i.getAttribute('src') != ''):
             ani_photo = i.getAttribute('src')
+            
+    for i in info4:
+        ani_ep = i.getAttribute('num')
     
     # Combine name, plot, image into list 
-    ani_list = [ani_name, ani_plot, ani_photo, search]
+    ani_list = [ani_name, ani_plot, ani_photo, search, ani_ep]
     
     return dict(message=(ani_list))
 
@@ -147,10 +152,8 @@ def add_to_watch_list():
     return
 
 def remove_from_watch_list():
-    #print(request.vars['id'])
     q = (session.logged_in_user == db.watch_list.username) & (db.watch_list.anime_id == request.vars['id'])
     cl = db(q).select().first()
-    #print(cl)
     if cl is not None:
        db(q).delete()
     
@@ -237,7 +240,7 @@ def paige():
 def youtube_trailer():
 
     search = request.vars.title
-    search = search + " trailer anime"
+    search = search + " trailer anime official"
 
     query = urllib.parse.quote(search)
     url = "https://www.youtube.com/results?search_query="+query
