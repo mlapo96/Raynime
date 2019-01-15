@@ -240,7 +240,7 @@ def paige():
 def youtube_trailer():
 
     search = request.vars.title
-    search = search + " trailer anime official"
+    search = search + " trailer anime preview"
 
     query = urllib.parse.quote(search)
     url = "https://www.youtube.com/results?search_query="+query
