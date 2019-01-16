@@ -13,7 +13,7 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
 	width: 27%; 
-	height: 40%;	
+	height: 50%;	
 	float: left;
 }
 #inner {
@@ -70,8 +70,17 @@ body {
 				<div id="description">id: {{=item}}</div>
 				<div id="description">{{=message[1][val]}}</div>
 				<div id="description">
+					<p>Watched {{=message[4][val]}} of {{=message[3][val]}} episodes: </p>
+					<progress value="{{=message[4][val]}}" max="{{=message[3][val]}}"></progress>
+				</div>
+				<div id="description">
+					<button onclick="location.href='update_current_ep?id={{=item}}&num=-1'">Prev</button>
+					<button onclick="location.href='update_current_ep?id={{=item}}&num=1'">Next</button>
+				</div>
+				<div id="description">
 					<img id="photo" src="{{=message[2][val]}}">
 				</div>
+				
 				<div id="description">
 					<button onclick="location.href='remove_from_watch_list?id={{=item}}'">Remove</button>
 				</div>

@@ -327,3 +327,8 @@ ALTER TABLE "watch_list" ADD "anime_name" CHAR(512);
 timestamp: 2019-01-13T18:05:20.875565
 ALTER TABLE "watch_list" ADD "anime_picture" CHAR(512);
 success!
+timestamp: 2019-01-16T14:26:08.112241
+ALTER TABLE "watch_list" ADD "anime_total_ep" CHAR(512);
+timestamp: 2019-01-16T14:26:08.138172
+ALTER TABLE "watch_list" ADD "anime_current_ep" CHAR(512);
+success!

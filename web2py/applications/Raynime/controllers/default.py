@@ -139,13 +139,16 @@ def add_to_watch_list():
     q = (session.logged_in_user == db.watch_list.username) & (db.watch_list.anime_id == request.vars['id'])
     cl = db(q).select().first()
 
+    print(request.vars['ep'])
     # adds username, anime_id to watch list 
     if cl is None:
         db.watch_list.insert(
             username = session.logged_in_user,
             anime_id = request.vars['id'],
             anime_name = request.vars['title'],
-            anime_picture = request.vars['photo']
+            anime_picture = request.vars['photo'],
+            anime_total_ep = request.vars['ep'],
+            anime_current_ep = '0'
         )
     
     redirect(URL('default', 'profile'))
@@ -157,6 +160,20 @@ def remove_from_watch_list():
     if cl is not None:
        db(q).delete()
     
+    redirect(URL('default', 'profile'))
+    return
+
+def update_current_ep():
+    q = (session.logged_in_user == db.watch_list.username) & (db.watch_list.anime_id == request.vars['id'])
+    cl = db(q).select().first()
+    if cl is not None:
+        print(request.vars['num'])
+        current_ep = int(cl.anime_current_ep) + int(request.vars['num'])
+        print(current_ep)
+        if current_ep >= 0 and current_ep <= int(cl.anime_total_ep):
+            cl.update_record(anime_current_ep = current_ep)
+            
+      
     redirect(URL('default', 'profile'))
     return
 
@@ -221,7 +238,9 @@ def profile():
     watch_list_id = []
     watch_list_name = []
     watch_list_photo = []
-    
+    watch_list_total_ep = []
+    watch_list_current_ep = []
+     
     q = (session.logged_in_user == db.watch_list.username)
     cl = db(q).select()
     
@@ -229,9 +248,11 @@ def profile():
         watch_list_id.append(row.anime_id)
         watch_list_name.append(row.anime_name)
         watch_list_photo.append(row.anime_picture)
+        watch_list_total_ep.append(row.anime_total_ep)
+        watch_list_current_ep.append(row.anime_current_ep)
 
     print(db(db.watch_list).select())    
-    return dict(message=(watch_list_id, watch_list_name, watch_list_photo))
+    return dict(message=(watch_list_id, watch_list_name, watch_list_photo, watch_list_total_ep, watch_list_current_ep))
 
 def paige():
     return dict(whatever=T('Im a Page'))
@@ -243,7 +264,7 @@ def youtube_trailer():
     search = search + " trailer anime preview"
 
     query = urllib.parse.quote(search)
-    url = "https://www.youtube.com/results?search_query="+query
+    url = "http://www.youtube.com/results?search_query="+query
     response = urllib.request.urlopen(url)
     html = response.read()
     search_results = re.findall(r'href=\"\/watch\?v=(.{11})', html.decode())
