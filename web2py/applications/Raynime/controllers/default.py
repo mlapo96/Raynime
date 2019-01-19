@@ -59,7 +59,7 @@ def index():
     sorted_list2 = []
     if len(lists) > 0:   
         sorted_list1, sorted_list2 = zip(*lists)
-    
+
     return dict(message=(sorted_list1,sorted_list2))
 
 # ---- Find anime by name ----

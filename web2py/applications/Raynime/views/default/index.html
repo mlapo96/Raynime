@@ -1,65 +1,8 @@
 {{include 'web2py_ajax.html'}}
-
-<style>
-body { 
-	background-color: #606060
-}
-</style>
+<link href="{{=URL('static', 'css/layout.css')}}" rel="stylesheet" type="text/css" />
 
 
-<style type="text/css">
-#main_div {
-	width: 80%; 
-	height: 85%; 
-	margin: 0 auto; 
-	background-color:white;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 10px;
-	padding-right: 10px;
-	overflow:scroll;
-}
-#box1 {
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-	width: 27%; 
-	height: 10%;	
-	float: left;
-}
-#inner {
-	width: 90%; 
-	height: 90%; 
-	margin: auto auto; 
-	background-color: Red;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 30px;
-	padding-right: 30px;
-}
-#description {
-	width: 90%; 
-	
-	margin: 0 auto; 
-	background-color: Green;
-	border: solid;
-	text-align:center;
-}
-</style>
-
-<!-- HEADER -->
-<div style="width: 80%; height: 10%; margin: 0 auto; background-color:Yellow; padding-top:10px; padding-left:20px">
-	<input type="button" onclick="location.href='paige'" value="find a new show" />
-	<input type="button" onclick="location.href='sign_up'" value="sign up/login" />
-	
-	{{if session.logged_in_user is '':}}
-		<p>login to view your profile</p>
-	{{else:}}
-		<input type="button" onclick="location.href='profile'" value="Profile" />
-	{{pass}}
-	
-</div>
+{{include 'header.html'}}
 	
 <!-- BODY -->
 <div id="main_div">
@@ -79,7 +22,7 @@ body {
 		}
 	</script>
 	
-	{{for letter in range(97,123):}}
+	{{for letter in range(65,91):}}
 		<div style="width:3%; float:left;">
 			<p onclick="location.href='index?starts_with={{=chr(letter)}}';">
 				{{=chr(letter)}}

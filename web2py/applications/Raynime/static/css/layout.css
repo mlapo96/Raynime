@@ -1,0 +1,63 @@
+
+body { 
+	background-color: #313638
+}
+
+#main_div {
+	width: 80%; 
+	height: 85%; 
+	margin: 0 auto; 
+	background-color:#E0DFD5;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	overflow:scroll;	
+}
+
+#box1 {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+	width: 27%; 
+	height: 10%;	
+	float: left;
+}
+
+#inner {
+	width: 90%; 
+	height: 90%; 
+	margin: auto auto; 
+	background-color: #F09D51;
+	border-radius: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+#description {
+	width: 90%; 
+	margin: 0 auto; 
+	background-color: #E8E9EB;
+	border: solid;
+	border-width: 2px;
+	text-align:center;
+}
+
+#photo {
+	padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+	width: 45%;
+	height: 50%;
+	margin: auto auto;
+	float:left;
+}
+
+#img {
+	max-width: 90%;
+	max-height: 70%;
+}

@@ -1,71 +1,15 @@
 {{include 'web2py_ajax.html'}}
 
-<style>
-body { 
-	background-color: #606060
-}
-</style>
+<link href="{{=URL('static', 'css/layout.css')}}" rel="stylesheet" type="text/css" />
 
-<style>
-#box1 {
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-	width: 27%; 
-	height: 50%;	
-	float: left;
-}
-#inner {
-	width: 90%; 
-	height: 90%; 
-	margin: auto auto; 
-	background-color: Red;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 30px;
-	padding-right: 30px;
-}
-#description {
-	width: 90%; 
-	
-	margin: 0 auto; 
-	background-color: Green;
-	border: solid;
-	text-align:center;
-}
-#photo {
-	max-width: 90%;
-	max-height: 70%;
-}
-
-</style>
-
-<style type="text/css">
-#main_div {
-	width: 80%; 
-	height: 85%; 
-	margin: 0 auto; 
-	background-color:white;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 10px;
-	padding-right: 10px;
-	overflow:scroll;
-}
-</style>
-
-<!-- HEADER -->
-<div style="width: 80%; height: 10%; margin: 0 auto; background-color:Yellow; padding-top:10px; padding-left:20px">
-	<input type="button" onclick="location.href='index'" value="back" />
-</div>
+{{include 'header.html'}}
 
 <div id="main_div">
 	<p style="font-weight:bold;">{{=session.logged_in_user}}</p>
 	<p>Watching:</p>
 	{{val=0}}
 	{{for item in message[0]:}}
-		<div id="box1">
+		<div id="box1" style="width: 27%; height:50%">
 			<div id="inner">
 				<div id="description">id: {{=item}}</div>
 				<div id="description">{{=message[1][val]}}</div>
@@ -78,7 +22,7 @@ body {
 					<button onclick="location.href='update_current_ep?id={{=item}}&num=1'">Next</button>
 				</div>
 				<div id="description">
-					<img id="photo" src="{{=message[2][val]}}">
+					<img id="img" src="{{=message[2][val]}}">
 				</div>
 				
 				<div id="description">

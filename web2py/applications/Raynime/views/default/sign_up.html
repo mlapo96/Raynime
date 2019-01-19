@@ -1,43 +1,19 @@
-<style>
-body { 
-	background-color: #606060
-}
-</style>
+<link href="{{=URL('static', 'css/layout.css')}}" rel="stylesheet" type="text/css" />
 
-<style type="text/css">
-#main_div {
-	width: 80%; 
-	height: 85%; 
-	margin: 0 auto; 
-	background-color:white;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
 
-#inner {	
-	background-color: #299cbc;
-	padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-	width: 27%; 
-	height: 30%;	
-	float: left;
-}
 
-</style>
 
-<div style="width: 80%; height: 10%; margin: 0 auto; background-color:Yellow; padding-top:10px; padding-left:20px">
+<!--div style="width: 80%; height: 10%; margin: 0 auto; background-color:Yellow; padding-top:10px; padding-left:20px">
 	<input type="button" onclick="location.href='paige';" value="find a new show" />
 	<input type="button" onclick="location.href='login';" value="login" />
-</div>
+</div-->
+
+{{include 'header.html'}}
 
 <div id="main_div">
 
 	<!-- Sign up div -->
-	<div id="inner">
+	<div id="inner" style="width: 27%; height: 30%;">
 		<div>
 			<h2>Sign Up/Log in</h2>
 		</div>
