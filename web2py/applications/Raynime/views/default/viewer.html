@@ -8,10 +8,10 @@
 <div id="main_div">
 	<div id="inner">
 		{{if message[2] != '':}}
-		<div id="photo" style="background-color:#313638;">
+		<div id="photo" style="background-color:#313638; text-align:center">
 		
 			<!-- display image -->
-			<img style="width:100%; max-height:100%; background-size:contain;" src="{{=message[2]}}">
+			<img style="min-height:100%; max-width:100%; margin: auto;" src="{{=message[2]}}">
 		
 		</div>
 		{{pass}}

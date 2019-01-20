@@ -5,8 +5,9 @@
 {{include 'header.html'}}
 
 <div id="main_div">
-	<p style="font-weight:bold;">{{=session.logged_in_user}}</p>
-	<p>Watching:</p>
+	<div style="font-family: 'Bree Serif', serif; font-size:18px">
+		<p>{{=session.logged_in_user}} is watching:</p>
+	</div>
 	{{val=0}}
 	{{for item in message[0]:}}
 		<div id="box1" style="width: 27%; height:50%">
@@ -21,8 +22,8 @@
 					<button onclick="location.href='update_current_ep?id={{=item}}&num=-1'">Prev</button>
 					<button onclick="location.href='update_current_ep?id={{=item}}&num=1'">Next</button>
 				</div>
-				<div id="description">
-					<img id="img" src="{{=message[2][val]}}">
+				<div id="description" style="height:65%">
+					<img id="img" src="{{=message[2][val]}}" style="min-height:100%">
 				</div>
 				
 				<div id="description">

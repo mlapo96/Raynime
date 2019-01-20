@@ -21,14 +21,14 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
 	width: 27%; 
-	height: 10%;	
+	height: 12%;	
 	float: left;
 }
 
 #inner {
 	width: 90%; 
 	height: 90%; 
-	margin: auto auto; 
+	margin: 0 auto;
 	background-color: #F09D51;
 	border-radius: 10px;
 	padding-top: 20px;
@@ -39,7 +39,8 @@ body {
 
 #description {
 	width: 90%; 
-	margin: 0 auto; 
+	align-items: center;
+	margin: 0 auto;
 	background-color: #E8E9EB;
 	border: solid;
 	border-width: 2px;
